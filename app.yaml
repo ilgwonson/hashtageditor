@@ -14,7 +14,7 @@
 # [START runtime]
 runtime: nodejs
 vm: true
-module: default
+module: hashtageditor
 # [END runtime]
 
 # Temporary setting to keep gcloud from uploading node_modules
