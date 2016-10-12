@@ -12,7 +12,7 @@
 # limitations under the License.
 #
 # [START runtime]
-application : hashtageditor
+service : hashtageditor
 runtime: nodejs
 vm: true
 module: hashtageditor
