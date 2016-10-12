@@ -15,7 +15,6 @@
 service : hashtageditor
 runtime: nodejs
 vm: true
-module: hashtageditor
 # [END runtime]
 
 # Temporary setting to keep gcloud from uploading node_modules
