@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title><%=title %></title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="/css/style.css" />
+		<script src="/js/hashTagEditor.js"></script>
+		<!--<script src="js/jquery-1.11.3.min.js"></script>-->
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="snb"></div>
+			<div class="article">
+				<h1>
+					Hashtag Editor
+				</h1>
+				<p>
+					this editor is maked contenteditable div and javascript.<br/> it activate like facebook, twitter.
+				</p>
+				<h2>
+					Get started
+				</h2>
+				<div>
+					<a class="github-button" href="https://github.com/ilgwonson/hashtageditor.git" data-style="mega" data-count-href="/ilgwonson/hashtageditor/stargazers" data-count-api="/repos//ilgwonson/hashtageditor#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star ilgwonson/hashtageditor on GitHub">
+						Go git hub
+					</a>
+				</div>
+				<div>
+					<textarea id="hashtag_editor" data-edittype="1" contenteditable="true" style="border:2px solid #666;width:500px;height:350px;padding:10px"></textarea>
+					<script>
+						var obj = document.getElementById("hashtag_editor");
+						var options={placeHolder : "enter text"};
+						var editors = bindHashtagEditor(obj, options);
+						editors[0].focus();
+					</script>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://buttons.github.io/buttons.js"></script>
+	</body>
+
+</html>

@@ -1,5 +1,20 @@
 extends layout
 
 block content
-  h1= title
-  p hashtagdddddddddd
+  div(class="wrap")
+    div(class="snb")
+      ul
+        li
+          a Demo
+          a Get started
+    div(class="article")
+      h1 Hashtag Editor
+      p this editor is maked contenteditable div and javascript.<br/> it activate like facebook, twitter.
+      h2 Get started
+      div
+        <!-- Place this tag where you want the button to render. -->
+        a(class="github-button", href="https://github.com/ilgwonson/hashtageditor.git", data-style="mega", data-count-href="/ilgwonson/hashtageditor/stargazers", data-count-api="/repos//ilgwonson/hashtageditor#stargazers_count", data-count-aria-label="# stargazers on GitHub", aria-label="Star ilgwonson/hashtageditor on GitHub") Go git hub
+      div
+        textarea(id="hashtag_editor", data-edittype="1", contenteditable="true", style="border:2px solid #666;width:500px;height:350px;padding:10px")
+
+        script var obj = document.getElementsById("hashtag_editor");var options={placeHolder : "enter text"};var editors = bindHashtagEditor(obj4, options);editors[0].focus();
