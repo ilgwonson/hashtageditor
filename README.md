@@ -1,8 +1,7 @@
 # hashtageditor
+
 hashtag editor using contenteditable div
 
-Hi, This script is hashtag editor, using div(contenteidtable), maked javascript.
+If you want demo and document. Click below link.
 
-I preparing script. because make demo site and menual.
-
-please wait a week.
+<a target="blanK" href="http://hashtageditor.onekwan.com/">go to demo site</a>
