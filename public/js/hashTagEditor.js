@@ -1,4 +1,11 @@
-(function(window) {
+/*
+	author : onekwan
+	email : onekwanson@gmail.com
+	version : 1.0.0
+	github : https://github.com/ilgwonson/hashtageditor
+ */
+
+(function(window,$) {
 	if (window.bindHashtagEditor) return false;
 	
 	window.bindHashtagEditor = function(obj,options) {
@@ -8,6 +15,10 @@
 			return false;
 		if(obj instanceof Array){
 			objArray = obj
+		}else if(obj instanceof $){
+			for(var k=0;k<obj.length;k++){
+				objArray.push(obj.eq(k).get(0));
+			}
 		}else{
 			objArray.push(obj);
 		}
@@ -76,8 +87,6 @@
 			this.editor = this.container;
 			this.initLines(this.container.innerHTML);
 		}
-		
-		
 		this.addEvent();
 		this.init_editorHeight = this.editorHeight = this.editor.offsetHeight - (parseInt(this.editor.style.paddingTop) + parseInt(this.editor.style.paddingBottom));
 		this.heightOfLine = this.editor.getElementsByClassName(this.classNames.lineClassName)[0].offsetHeight;
@@ -89,12 +98,14 @@
 	HashTagEditor.prototype.makeContentEditableHTML = function() {
 		var wrapper_div = document.createElement("div");
 		var editor_div = document.createElement("div");
-		wrapper_div.className = "hashtag-editor_wrapper"
+		wrapper_div.className = "hashtag-editor_wrapper";
 		editor_div.className = "hashtag-editor";
 		editor_div.contentEditable = true;
 		editor_div["strip-br"] = true;
-		extend(editor_div.style, this.container.style);
+		var origin_dom_style = window.getComputedStyle(this.container);
+		copyComputedStyle(this.container, editor_div);
 		wrapper_div.appendChild(editor_div);
+		wrapper_div.style.width = origin_dom_style.width;
 		this.container.parentNode.insertBefore(wrapper_div, this.container);
 		this.container.style.display = "none";
 		wrapper_div.appendChild(this.container);
@@ -112,14 +123,13 @@
 		var temp,res = "";
 		switch(type){
 			case "3" :
-				console.log(text);
+				res = text;
+				break;
+			case "2" :
 				temp = text.split("<br>");
 				for(var i=0;i<temp.length;i++){
 					res += this.getRowNode("text",temp[i]);
 				}
-				break;
-			case "2" :
-				res = text;
 				break;
 			case "1" :
 			default :
@@ -129,7 +139,16 @@
 				}
 				break;
 		}
-		this.editor.innerHTML = res;		
+		this.editor.innerHTML = res;
+		var lines = this.editor.getElementsByClassName(this.classNames.lineClassName);
+		for(var i=0;i<lines.length;i++){
+			console.log(i)
+			this.f_editorChange({
+				type : "init",
+				currentLine : lines[i],
+				notMove : true
+			});
+		}
 	}
 	//에디터에 작성된 값을 추출
 	HashTagEditor.prototype.setTextValue = function(type){
@@ -172,9 +191,8 @@
 	HashTagEditor.prototype.focus = function() { 
 		if(getBrowserType() == "firefox") return false; //firefox에서는 작동 안함
 		var self = this;
-		var tar = self.getLastChild(self.editor);
+		var tar = self.getLastChild();
 		if(self.init){
-			console.log("hi");
 			self.f_init();
 		}
 		setTimeout(function() {//ie는 setTimeout을 주어야 정상 작동
@@ -191,14 +209,16 @@
 		return offset;
 	}
 
-	HashTagEditor.prototype.getLastChild = function(el) { //커서 위치에서 젤 가까운 span node 검색
-		var lastchild = null;
-		if (el.className == this.classNames.spanClassName || el.className == this.classNames.placeholderClassName) {
-			lastchild = el;
-		} else if (el.childNodes.length) {
-			lastchild = this.getLastChild(el.childNodes[el.childNodes.length - 1]);
+	HashTagEditor.prototype.getLastChild = function() { //에디터에서 맨마지막 span node 검색
+		if(this.init) {
+			return this.editor.childNodes[0].childNodes[0];
+		}else{
+			var tar = null;
+			tar = this.editor.childNodes[this.editor.childNodes.length-1];
+			tar = tar.childNodes[tar.childNodes.length-1];
+			return tar;
 		}
-		return lastchild;
+
 	}
 
 	HashTagEditor.prototype.addEvent = function() {		
@@ -402,6 +422,13 @@
 			}, 0);
 			e.preventDefault();
 		});
+		self.editor.addEventListener("blur",function(){
+			if(removeTag(self.editor.innerHTML)==""){
+				self.init = true;
+				self.editor.innerHTML = self.getRowNode("text",(self.placeHolder ? self.placeHolder: ""),self.init);
+				return;
+			}
+		});
 	}
 	function extend(el, attribs) {
 		for (var x in attribs)
@@ -491,7 +518,7 @@
 	
 	//붙여넣기, 백스페이스, 엔터, 그리고 1byte charater가 입력될경우에는 텍스트 랩핑 실행
 	HashTagEditor.prototype.f_editorChange = function(args){
-		if(args.type == "paste" || args.type == "backspace" || args.type == "enter" || args.type == "1ch"){
+		if(args.type == "init" || args.type == "paste" || args.type == "backspace" || args.type == "enter" || args.type == "1ch"){
 			this.makeHashTag(args.currentLine,args.notMove); 
 		}	
 
@@ -728,5 +755,46 @@
 		    element.fireEvent("on" + event.eventType, event);
 		  }
 	}
+	var copyComputedStyle = function(from,to){
+		var computed_style_object = false;
 
-})(window);
+		computed_style_object = from.currentStyle || document.defaultView.getComputedStyle(from,null);
+
+		if(!computed_style_object) return null;
+
+		var stylePropertyValid = function(name,value){
+			return typeof value !== 'undefined' &&
+				typeof value !== 'object' &&
+				typeof value !== 'function' &&
+				value.length > 0 &&
+				value != parseInt(value) &&
+				property.indexOf("webkit") < 0 &&
+					name != "cssText"
+
+
+		};
+		var i=0;
+		for(property in computed_style_object)
+		{
+
+			//console.log(property)
+			if(stylePropertyValid(property,computed_style_object[property]))
+			{
+				if(i>480 && i <500){
+					console.log(property)
+				}
+
+				i++;
+
+
+					to.style[property] = computed_style_object[property];
+
+			}
+		}
+
+	};
+
+	$.fn.bindHashtagEditor = function(options){
+		bindHashtagEditor($(this), options);
+	}
+})(window,jQuery);
