@@ -17,7 +17,7 @@ runtime: nodejs
 vm: true
 handlers:
 - url: /
-  script: app.js
+  script: ./bin/www
 - url: /css
   static_dir: public/css
 - url: /fonts
