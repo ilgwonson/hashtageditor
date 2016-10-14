@@ -15,12 +15,6 @@
 service : hashtageditor
 runtime: nodejs
 vm: true
-# [END runtime]
-
-# Temporary setting to keep gcloud from uploading node_modules
-skip_files:
- - ^node_modules$
-
  handlers:
  - url: /css
    static_dir: public/css
@@ -30,3 +24,9 @@ skip_files:
    static_dir: public/images
 - url: /js
   static_dir: public/jss
+# [END runtime]
+
+# Temporary setting to keep gcloud from uploading node_modules
+skip_files:
+ - ^node_modules$
+
