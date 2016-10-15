@@ -1,5 +1,0 @@
-service : hashtageditor
-dispatch:
-  # Default module serves simple hostname request.
-  - url: "hashtageditor.onekwan.com/"
-    module: hashtageditor
