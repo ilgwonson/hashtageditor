@@ -1,8 +1,14 @@
 {
   "name": "hashtageditor",
-  "version": "1.0.0",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start": "npm start"
+    "start": "node ./bin/www"
+  },
+  "license":"MIT License",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ilgwonso"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
