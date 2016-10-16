@@ -1,0 +1,5 @@
+ dispatch:
+ - url: "hashtageditor.onekwan.com/"
+    module: hashtageditor
+ - url: "hashtageditor.onekwan.com/*"
+    module: hashtageditor
