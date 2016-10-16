@@ -19,13 +19,13 @@ handlers:
 - url: /
   script: bin/www
 
-- url: /css
+- url: /css/*
   static_dir: public/css
 
-- url: /js
+- url: /js/*
   static_dir: public/js
 
-- url: /images
+- url: /images/*
   static_dir: public/images
 # [END runtime]
 
