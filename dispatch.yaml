@@ -1,15 +1,15 @@
  dispatch:
- - url: "hashtageditor.onekwan.com/"
+ - url: "http://hashtageditor.onekwan.com/"
     module: default
 
-  - url: "hashtageditor.onekwan.com/css/*"
+  - url: "http://hashtageditor.onekwan.com/css/*"
     module: default
 
-  - url: "hashtageditor.onekwan.com/js/*"
+  - url: "http://hashtageditor.onekwan.com/js/*"
     module: default
 
-  - url: "hashtageditor.onekwan.com/fonts/*"
+  - url: "http://hashtageditor.onekwan.com/fonts/*"
     module: default
 
-  - url: "hashtageditor.onekwan.com/images/*"
+  - url: "http://hashtageditor.onekwan.com/images/*"
     module: default
