@@ -1,14 +1,14 @@
  dispatch:
  - url: "hashtageditor.onekwan.com/"
     module: hashtageditor
-  - url: "hashtageditor.onekwan.com/css"
+  - url: "hashtageditor.onekwan.com/css/*"
     module: hashtageditor
 
-  - url: "hashtageditor.onekwan.com/js"
+  - url: "hashtageditor.onekwan.com/js/*"
     module: hashtageditor
 
-  - url: "hashtageditor.onekwan.com/fonts"
+  - url: "hashtageditor.onekwan.com/fonts/*"
     module: hashtageditor
 
-  - url: "hashtageditor.onekwan.com/images"
+  - url: "hashtageditor.onekwan.com/images/*"
     module: hashtageditor
