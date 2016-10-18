@@ -18,7 +18,7 @@ vm: true
 handlers :
 - url: /
   script: bin/www
-- url: http://hashtageditor\.onekwan\.com/css/(.*\.css)
+- url: http:\/\/hashtageditor\.onekwan\.com\/css\/(.*\.css)
   static_files: css/\1
   upload: css/(.*\.css)
 # [END runtime]
