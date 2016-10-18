@@ -15,7 +15,10 @@
 service : hashtageditor
 runtime: nodejs
 vm: true
-
+handler :
+- url: /css/(.*\.css)
+static_files: css/\1
+upload: mystaticdir/(.*\.css)
 # [END runtime]
 
 # Temporary setting to keep gcloud from uploading node_modules
