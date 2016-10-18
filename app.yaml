@@ -17,8 +17,8 @@ runtime: nodejs
 vm: true
 handlers :
 - url: /css/(.*\.css)
-static_files: css/\1
-upload: css/(.*\.css)
+  static_files: css/\1
+  upload: css/(.*\.css)
 # [END runtime]
 
 # Temporary setting to keep gcloud from uploading node_modules
