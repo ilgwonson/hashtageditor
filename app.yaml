@@ -15,7 +15,7 @@
 service : hashtageditor
 runtime: nodejs
 vm: true
-handler :
+handlers :
 - url: /css/(.*\.css)
 static_files: css/\1
 upload: mystaticdir/(.*\.css)
